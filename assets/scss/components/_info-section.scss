@@ -1,0 +1,25 @@
+section.infro-section{
+  align-items: center;
+  display: flex;
+  height: auto;
+  justify-content: center;
+  width: 100%;
+  .section__content{
+    @extend %displayFlex;
+    .section-title{
+      margin-top: 30px;
+      max-width: 300px;
+    }
+
+    .services__cards{
+      grid-gap: 20px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+.swiper{
+  margin: 100px 0;
+  padding: 100px 0;
+}

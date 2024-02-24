@@ -1,0 +1,99 @@
+@import "../fonts";
+@import "../variables";
+@import "../extends";
+@import "navbar";
+@import "header";
+@import "info-section";
+@import "swiper";
+@import "../loginPageStyles/main";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Krub', sans-serif;
+  font-weight: 400;
+}
+body{
+  position: relative;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+section{
+  margin-bottom: 100px;
+}
+input:focus{
+  box-shadow: 0 0 3px 2px $main-accent-color;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
+h1.title{
+  color: $light-font-color;
+  font-family: $rubik;
+  font-size: 35px;
+  font-weight: 700;
+}
+p.text{
+  color: $light-font-color;
+  font-size: 20px;
+  line-height: 30px;
+}
+.certificate__check-btn{
+  background: $btn-gradient;
+  color: #2b2b2b;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #353535;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  padding: 16px 20px;
+  position: relative;
+  text-transform: uppercase;
+  &:hover{
+    filter: brightness(110%);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+}
+
+.section-title{
+  color: #1c1f35;
+  font-size: 35px;
+  font-weight: 600;
+}
+.section-info p{
+  background-color: #f3f3f3;
+  border-left: 3px solid gold;
+  display: flex;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 29px;
+  max-width: 170px;
+  padding: 3px 6px;
+  text-transform: capitalize;
+}

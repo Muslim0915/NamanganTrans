@@ -1,0 +1,69 @@
+.login-page__body {
+  background-color: $main-bg-color;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-page__container{
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .form{
+      margin-top: 30px;
+      background-color: #fff;
+      border: 3px solid $main-bg-color;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      max-width: 350px;
+      padding: 20px 20px 30px;
+      text-align: center;
+      width: 100%;
+      .form__title{
+        margin-bottom: 50px;
+      }
+      .form-control{
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        position: relative;
+        .error{
+          color: red;
+        }
+        input{
+          width: 100%;
+          border: 2px solid $main-bg-color;
+          padding: 10px 15px;
+          border-radius: 8px;
+        }
+
+      }
+      .file{
+        display: flex;
+        flex-direction: unset;
+        justify-content: space-between;
+        align-items: center;
+        #customFile{
+          border: 1px solid $main-bg-color;
+          background-color: $main-bg-color;
+          color: $light-font-color;
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+          border-radius: 8px;
+          &:hover{
+            filter: brightness(110%);
+          }
+        }
+      }
+      .certificate__check-btn{
+        align-self: center;
+      }
+    }
+  }
+}
+
