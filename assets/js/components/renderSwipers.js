@@ -1,4 +1,4 @@
-import {swipers} from "./swipers.js";
+import {showError} from "../customFunctions/showError.js";
 
 const renderSwipers = (data) => {
     const swiperContainer = document.querySelector('.swiper-wrapper');
@@ -8,12 +8,14 @@ const renderSwipers = (data) => {
         swiperSlide.classList.add('swiper-slide');
         swiperSlide.innerHTML = `
             <div class="swiper__card">
-                <div class="swiper__card-img">
-                    <img alt="image" src="${element.src}">
-                </div>
-                <div class="swiper__card-info">
+                <div class="swiper__card-head">
+                    <img alt="image" width="50" height="50" src="${element.src}">
+                    <div class="swiper__card-title">
                     <h3>${element.title}</h3>
                     <p>${element.date}</p>
+</div>
+                </div>
+                <div class="swiper__card-info">
                     <p>${element.text}</p>
                     <div class="rating">
                         ${getStarRating(element.rate)}
@@ -51,23 +53,37 @@ const getStarRating = (rate) => {
         return stars;
     }
 }
+const storedData = JSON.parse(localStorage.getItem('swipers')) || [];
 
+const form = document.querySelector('header .form');
 const searchInput = document.querySelector('.certificate__search-input');
+const certificateContainer = document.querySelector('.certificate__container');
 
-searchInput.addEventListener('input', (event) => {
-    const searchTerm = searchInput.value.trim(); // Получаем текст из поля ввода
+function searchCertificate(event) {
+    event.preventDefault();
+    const searchValue = searchInput.value.trim();
+    const foundDriver = storedData.find(user => user.id === searchValue);
+    if (foundDriver) {
+        certificateContainer.innerHTML = "";
+        certificateContainer.classList.add('active');
+        certificateContainer.innerHTML = `
+            <div class="certificate-info">
+                <h2>Certificate ID: ${foundDriver.id}</h2>
+                <p>Name: ${foundDriver.title}</p>
+                <p>About: ${foundDriver.text}</p>
+                <p class="rating">Rating: ${getStarRating(foundDriver.rate)}</p>
+                <img src="${foundDriver.src}" alt="Certificate Image">
+            </div>
+        `;
+    } else if (searchInput.value === "") {
+        showError(searchInput, 'Search field cannot be empty');
+    }
+    else {
+        showError(searchInput, 'Certificate not found');
+    }
+}
 
-    // Фильтруем данные по введенному тексту
-    const filteredData = swipers.filter(item => {
-        // Здесь мы используем регулярное выражение для поиска только цифр в айди
-        const regex = /^\d+$/; // Регулярное выражение для поиска только цифр
-        return regex.test(searchTerm) && item.id.includes(searchTerm); // Проверяем, содержит ли айди введенные цифры
-    });
-
-    // Перерендериваем слайдер с отфильтрованными данными
-    renderSwipers(filteredData);
-})
-
-const storedData = JSON.parse(localStorage.getItem('drivers')) || [];
-
-window.onload = () => renderSwipers(storedData);
+form.addEventListener('submit', searchCertificate);
+window.onload = () => {
+    renderSwipers(storedData)
+};

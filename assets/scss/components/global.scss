@@ -97,3 +97,12 @@ p.text{
   padding: 3px 6px;
   text-transform: capitalize;
 }
+.rating{
+  i{
+    color: $main-accent-color;
+    margin-right: 5px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { showError } from "./customFunctions/showError.js";
-import { swipers } from "./components/swipers.js";
 
 const form = document.querySelector('.form');
+const userId = document.querySelector('.user-id');
+const storedData = JSON.parse(localStorage.getItem('swipers')) || [];
 
 const currentDate = new Date();
 const year = currentDate.getFullYear();
@@ -20,7 +21,7 @@ function generateUniqueId() {
 }
 
 function isIdUsed(id) {
-    return swipers.some(driver => driver.id === id);
+    return storedData.some(driver => driver.id === id);
 }
 
 // Добавляем обработчик события для input[type="file"]
@@ -44,25 +45,29 @@ function checkValid(event) {
     let name = document.querySelector('input[name="name"]');
     let about = document.querySelector('input[name="about"]');
     let rate = document.querySelector('input[name="rate"]');
-
+    let newDriver = {
+        id: generateUniqueId(),
+        date: formattedDate,
+        title: name.value,
+        text: about.value,
+        rate: rate.value,
+        src: localStorage.getItem('uploadedImage') // Используем сохраненное изображение из Local Storage
+    };
     if (name.value === '' || about.value === '' || rate.value === '' || fileInput.value === '') {
         showError(name, 'Foydalanuvchi ismi to\'ldirilsin');
         showError(about, 'Foydalanuvchi haqida malumot to\'ldirilsin');
         showError(rate, 'Foydalanuvchi reytingi to\'ldirilsin');
         showError(fileInput, 'Foydalanuvchi rasm to\'ldirilsin');
-    } else {
-        let newDriver = {
-            id: generateUniqueId(),
-            date: formattedDate,
-            name: name.value,
-            about: about.value,
-            rate: rate.value,
-            src: localStorage.getItem('uploadedImage') // Используем сохраненное изображение из Local Storage
-        };
+    }
+    else if(newDriver.rate < 1 || newDriver.rate > 5) {
+        showError(rate, 'Foydalanuvchi reytingi 1 dan 5 gacha bo\'lishi kerak');
+    }
+    else {
 
-        swipers.push(newDriver);
-        localStorage.setItem('drivers', JSON.stringify(swipers));
-        location.href = 'index.html';
+        storedData.push(newDriver);
+        localStorage.setItem('swipers', JSON.stringify(storedData));
+        form.reset();
+        userId.innerHTML = `Haydovchi ID : <span> ${newDriver.id} </span> `;
     }
 }
 

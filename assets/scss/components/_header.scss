@@ -1,8 +1,9 @@
-header.header{
+header.header {
   margin: 100px 0;
   height: 520px;
   position: relative;
-  .hero-overlay{
+
+  .hero-overlay {
     background: linear-gradient(90deg, rgba(236, 155, 3, .824), rgba(100, 14, 131, .081) 70%);
     z-index: 2;
     height: 100%;
@@ -11,33 +12,56 @@ header.header{
     left: 0;
     top: 0;
   }
-  .container{
+
+  .container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .certificate__container {
+    display: none;
+    min-height: 300px;
     flex-direction: column;
     justify-content: center;
+    background: #ffffff;
+    padding: 20px;
+
+    .certificate-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      p, h2{
+        margin-bottom: 10px;
+      }
+    }
   }
-  .header__content{
+
+  .certificate__container.active {
+    display: flex;
+  }
+
+  .header__content {
     width: 50%;
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 3;
-    .text{
+
+    .text {
       margin: 20px 0;
     }
-    .header__buttons{
+
+    .header__buttons {
       display: flex;
       align-items: center;
       margin-top: 20px;
-      .contact-btn{
-        color: $light-font-color;
-        margin-left: 30px;
-        text-transform: uppercase;
-        font-weight: 600;
-      }
     }
   }
-  .certificate__search-input{
+
+  .certificate__search-input {
     border: none;
     border-radius: 5px;
     font-size: 18px;
@@ -47,5 +71,17 @@ header.header{
     text-indent: 10px;
     transition: .3s;
     width: 100%;
+  }
+
+  .form__buttons {
+    display: flex;
+    align-items: center;
+
+    .contact-btn {
+      color: $light-font-color;
+      margin-left: 30px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
   }
 }
