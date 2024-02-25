@@ -1,4 +1,5 @@
 import { showError } from "./customFunctions/showError.js";
+import {removeErrors} from "./customFunctions/removeErrors.js";
 
 const form = document.querySelector('.form');
 const userId = document.querySelector('.user-id');
@@ -67,12 +68,9 @@ function checkValid(event) {
         storedData.push(newDriver);
         localStorage.setItem('swipers', JSON.stringify(storedData));
         form.reset();
-        userId.innerHTML = `Haydovchi ID : <span> ${newDriver.id} </span> `;
+        userId.innerHTML = `Haydovchi ID: <span> ${newDriver.id} </span> `;
     }
 }
 
-function removeErrors() {
-    document.querySelectorAll('.error').forEach(element => element.remove());
-}
 
 form.addEventListener('submit', (event) => checkValid(event));

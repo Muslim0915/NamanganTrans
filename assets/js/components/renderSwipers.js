@@ -1,4 +1,5 @@
 import {showError} from "../customFunctions/showError.js";
+import {removeErrors} from "../customFunctions/removeErrors.js";
 
 const renderSwipers = (data) => {
     const swiperContainer = document.querySelector('.swiper-wrapper');
@@ -60,6 +61,8 @@ const searchInput = document.querySelector('.certificate__search-input');
 const certificateContainer = document.querySelector('.certificate__container');
 
 function searchCertificate(event) {
+    removeErrors();
+    searchInput.classList.remove('input_errored');
     event.preventDefault();
     const searchValue = searchInput.value.trim();
     const foundDriver = storedData.find(user => user.id === searchValue);
@@ -75,11 +78,12 @@ function searchCertificate(event) {
                 <img src="${foundDriver.src}" alt="Certificate Image">
             </div>
         `;
-    } else if (searchInput.value === "") {
-        showError(searchInput, 'Search field cannot be empty');
     }
     else {
-        showError(searchInput, 'Certificate not found');
+        searchInput.value = '';
+        searchInput.focus();
+        searchInput.classList.add('input_errored');
+        searchInput.setAttribute('placeholder', 'Sertifiak topilmadi');
     }
 }
 

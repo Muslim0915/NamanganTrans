@@ -1,11 +1,12 @@
 section.infro-section{
-  align-items: center;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: auto;
-  justify-content: center;
   width: 100%;
   .section__content{
     @extend %displayFlex;
+    margin-bottom: 160px;
     .section-title{
       margin-top: 30px;
       max-width: 300px;
@@ -15,6 +16,13 @@ section.infro-section{
       display: grid;
       gap: 20px;
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .section__image{
+    width: 100%;
+    img {
+      object-fit: cover;
+      width: 100%;
     }
   }
 }
